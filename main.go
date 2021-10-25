@@ -2,19 +2,15 @@ package main
 
 import (
 	"flag"
+
+	"github.com/kasattejaswi/terradep/deps"
 )
 
 var runFlag bool
 
 func main() {
 	flag.Parse()
-	// if !runFlag {
-	// 	fmt.Println(`
-	// 	Usage terradep command [args]
-	// 	run					Start resolv
-	// 	`)
-
-	// }
+	deps.Greet()
 }
 
 func init() {
