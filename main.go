@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"log"
 
 	"github.com/kasattejaswi/terradep/deps"
 )
@@ -10,7 +12,11 @@ var runFlag bool
 
 func main() {
 	flag.Parse()
-	deps.Greet()
+	d, err := deps.ReadDcf("dependencyConfigs.yaml")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(d.Dependencies)
 }
 
 func init() {
