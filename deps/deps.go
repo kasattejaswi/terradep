@@ -8,13 +8,13 @@ import (
 
 type dcf struct {
 	Metadata struct {
-		Name    string `yaml: "name"`
-		Version string `yaml: "version"`
-	} `yaml: "metadata"`
+		Name    string `yaml:"name"`
+		Version string `yaml:"version"`
+	} `yaml:"metadata"`
 	Dependencies []struct {
-		Name    string `yaml: "name"`
-		Version string `yaml: "version"`
-	} `yaml: "dependencies"`
+		Name    string `yaml:"name"`
+		Version string `yaml:"version"`
+	} `yaml:"dependencies"`
 }
 
 func ReadDcf(filePath string) (*dcf, error) {
