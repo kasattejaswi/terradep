@@ -1,11 +1,13 @@
 package cmd
 
 import (
-	"fmt"
+	"log"
 
+	"github.com/kasattejaswi/terradep/configs"
 	"github.com/spf13/cobra"
 )
 
+// Root config command
 var configCmd = &cobra.Command{
 	Use:   "config",
 	Short: "Setup configuration for terradep",
@@ -15,21 +17,29 @@ commandline in order to resolve modules as dependencies from different repositor
 It creates an encrypted file under ~/.terradep.
 This file can be edited directly updating repositories, 
 usernames and passwords. To edit directly, file must be decrypted first`,
+}
+
+// Init command
+var initCmd = &cobra.Command{
+	Use:   "init",
+	Short: "Initialize an empty configuration in user's home directory",
+	Long:  "Initialize an empty configuration in user's home directory",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("config called")
+		fStatus, err := cmd.Flags().GetBool("force")
+		if err != nil {
+			log.Fatal("Error occurred: ", err)
+		}
+		if fStatus {
+			configs.ForceInitializeConfig()
+		} else {
+			configs.InitializeConfig()
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(configCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// configCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// configCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	configCmd.AddCommand(initCmd)
+	initCmd.Flags().BoolP("force", "f", false, "Force initialize empty config file")
+	// initCmd.Flags().Bool("toggle", "t", false, "Help message for toggle")
 }

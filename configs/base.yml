@@ -1,0 +1,36 @@
+proxy:
+  url: null
+  port: null
+  username: null
+  password: null
+repositories:
+  git:
+    - url: https://github.com
+      username: username
+      password: password@12345
+      sshPrivateKeyPath: ~/.ssh/id_rsa
+      alias: git-github
+    - url: https://gitlab.com
+      username: username
+      password: password@12345
+      sshPrivateKeyPath: ~/.ssh/id_rsa
+      alias: git-gitlab
+  svn:
+    - url: https://mysvn.com
+      username: username
+      password: password@12345
+      alias: svn-alias
+  mercury:
+    - url: https://mercurysample.com
+      username: username
+      password: password@12345
+      alias: mercury-alias
+  http:
+    - url: https://myhttprepo.com
+      username: username
+      password: password@12345
+      method: GET
+      headers:
+        User-Agent: "Chrome"
+        Content-Type: "application/json"
+      alias: http-repo
