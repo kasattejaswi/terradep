@@ -1,8 +1,14 @@
 proxy:
-  url: null
-  port: null
-  username: null
-  password: null
+  httpProxy:
+    url: null
+    port: null
+    username: null
+    password: null
+  httpsProxy:
+    url: null
+    port: null
+    username: null
+    password: null
 repositories:
   git:
     - url: https://github.com
