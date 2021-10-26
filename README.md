@@ -20,6 +20,18 @@ This command updates the configuration of terradep.<br>
 This includes operations on adding and removing repositories, updating credential information and encrypting/decrypting and locking/unlocking configuration file, so that unauthorized access can be prevented.<br>
 It will also generate a new configuration file in case it is not already present inside $USER/.terradep/
 
+```
+Usage:
+  terradep config [command]
+
+Available Commands:
+  init        Initialize an empty configuration in user's home directory
+  set-proxy   Set proxy related configuration
+
+Flags:
+  -h, --help   help for config
+```
+
 ## run
 This command will start resolving of dependencies in the recursive manner.<br>
 It will read the data from the repositories configured in dependencies file and in terradep configuration.<br>

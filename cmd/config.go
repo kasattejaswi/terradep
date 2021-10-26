@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/kasattejaswi/terradep/configs"
@@ -37,9 +38,21 @@ var initCmd = &cobra.Command{
 	},
 }
 
+// Proxy config
+var proxyCmd = &cobra.Command{
+	Use:   "set-proxy",
+	Short: "Set proxy related configuration",
+	Long:  "Set proxy related configurations",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Proxy configuration running")
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(configCmd)
+
 	configCmd.AddCommand(initCmd)
 	initCmd.Flags().BoolP("force", "f", false, "Force initialize empty config file")
-	// initCmd.Flags().Bool("toggle", "t", false, "Help message for toggle")
+
+	configCmd.AddCommand(proxyCmd)
 }
