@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/kasattejaswi/terradep/configs"
@@ -39,13 +38,45 @@ var initCmd = &cobra.Command{
 }
 
 // Proxy config
+// Command variables
+var interactive bool
+var proxyType string
+var hostname string
+var port string
+var username string
+var password string
+
 var proxyCmd = &cobra.Command{
-	Use:   "set-proxy",
+	Use:   "setProxy",
 	Short: "Set proxy related configuration",
 	Long:  "Set proxy related configurations",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Proxy configuration running")
+		if interactive {
+			configs.StartInteractiveProxyConfigurationSession()
+		} else {
+			if proxyType == "" {
+				printHelpWithError(cmd, "proxyType is required")
+			}
+			if hostname == "" {
+				printHelpWithError(cmd, "hostname is required")
+			}
+			if port == "" {
+				printHelpWithError(cmd, "port is required")
+			}
+			if username == "" {
+				printHelpWithError(cmd, "username is required")
+			}
+			if password == "" {
+				printHelpWithError(cmd, "password is required")
+			}
+			configs.SetupProxyInConfiguration(proxyType, hostname, port, username, password)
+		}
 	},
+}
+
+func printHelpWithError(cmd *cobra.Command, errorMessage string) {
+	cmd.Help()
+	log.Fatal("Error:", errorMessage)
 }
 
 func init() {
@@ -55,4 +86,10 @@ func init() {
 	initCmd.Flags().BoolP("force", "f", false, "Force initialize empty config file")
 
 	configCmd.AddCommand(proxyCmd)
+	proxyCmd.Flags().BoolVarP(&interactive, "interactive", "i", false, "Use this flag to interactively enter values")
+	proxyCmd.Flags().StringVar(&proxyType, "type", "", "Type of proxy: httpProxy or httpsProxy")
+	proxyCmd.Flags().StringVar(&hostname, "hostname", "", "Proxy hostname")
+	proxyCmd.Flags().StringVar(&port, "port", "", "Port number for proxy")
+	proxyCmd.Flags().StringVar(&username, "username", "", "Username for proxy authentication. Leave it empty in case of no auth")
+	proxyCmd.Flags().StringVar(&password, "password", "", "Username for proxy authentication. Leave it empty in case of no auth")
 }
