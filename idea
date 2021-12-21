@@ -1,0 +1,26 @@
+This document is just a rough idea on what this project is all about
+
+By default, in terraform, there is no such thing like dependency management for modules which might be required
+in case we are working in an organization or in order to promote module versioning and code reusability.
+
+What this tool will do?
+It will allow you to set dependencies on modules in your terraform project and will download them for you.
+You can use modules created by other users so that you don't have to write code again.
+
+For example:
+If you want to create a virtual machine on azure, you need to create multiple components on which a
+virtual machine is dependent like network interface cards etc. So, what if someone put them in a module
+by exposing required parameters and you just call it by passing parameters to it rather than creating 
+everything on your own. Good idea right ?
+
+Thats what terradep does for you.
+
+Features it will have:
+It will help you to generate an artifact of your modules and put them in a repository from the list of
+supported repositories.
+It will generate base dependency file for you which you can modify as per your requirement.
+It will also generate a base configuration file for terradep. You can update it as well.
+A command line interface which will help modify your config files through command line.
+It will read your dependency file and download all required dependencies while running.
+It can also help you to build and generate terraform artifacts as well and upload them to repo.
+It can also help you to download terraform artifacts and download them before running.
