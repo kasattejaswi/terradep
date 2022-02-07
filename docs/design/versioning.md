@@ -9,5 +9,6 @@ PATCH - When bug fixes with backward compatible changes will be published.
 
 The first version will be 0.1.0
 During development, it will be labelled as 0.1.0-alpha
-Once all the development is completed, it will labelled as 0.1.0-beta
-At the end, when there are minimal bugs, first major version will be released labelled as 1.0.0
+Once all the development is completed, it will be labelled as 0.1.0-beta
+At the end, when there are minimal/no bugs, first major version will be released labelled as 1.0.0
+
